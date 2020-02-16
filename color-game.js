@@ -16,21 +16,28 @@ let colors = generateRandomColors(6);
 let squares = document.querySelectorAll(".square");
 let messageDisplay = document.querySelector("#message");
 
+let pickedColor = pickColor();
+let colorDisplay = document.getElementById("colorDisplay");
+
+colorDisplay.textContent = pickedColor;
+//add click listeners to the squares
+
 for (let i = 0; i < squares.length; i++) {
     squares[i].style.backgroundColor = colors[i];
     //Add color number to span in HTML 
-    let pickedColor = pickColor();
-    let colorDisplay = document.getElementById("colorDisplay");
-
-    colorDisplay.textContent = pickedColor;
-    //add click listeners to the squares
 
     squares[i].addEventListener("click", (e) => {
         let colourClicked = e.toElement.style.backgroundColor;
         //compare the pickedColor to the clickedColour
-        if (colourClicked === pickedColor) {
+        // console.log(colourClicked, pickedColor);
+        let trimmedColourClicked = colourClicked.replace(/\s/g, '');
+        let trimmedPickedColor = pickedColor.replace(/\s/g, '');
+        if (trimmedColourClicked == trimmedPickedColor) {
             messageDisplay.textContent = "Correct";
             correctColor(pickedColor);
+            // setTimeout(() => {
+            //     generateRandomColors(6);
+            // }, 2000);
         } else {
             e.toElement.style.backgroundColor = '#232323';
             messageDisplay.textContent = "Try Again";
@@ -59,11 +66,14 @@ function generateRandomColors(num) {
     }
     return arr;
 }
+
 function randomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
     let b = Math.floor(Math.random() * 256);
-    return "rgb(" + r + "," + g + "," + b + ")";
+    // Template Literals
+    return `rgb(${r}, ${g}, ${b})`;
+    // return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 // function generateRandomColors(num) {
 //     let arr = []
