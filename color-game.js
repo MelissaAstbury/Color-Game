@@ -1,4 +1,20 @@
 let colors = generateRandomColors(6);
+let h1 = document.querySelector("h1");
+//let resetButton = docuemnt.querySelector("#reset");
+let resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", function () {
+    //generate all new colors
+    colors = generateRandomColors(6);
+    //pick a new randon color from array
+    pickedColor = pickColor();
+    //change colorDisplay to match picked color
+    colorDisplay.textContent = pickedColor;
+    //change colors of squares
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].style.background = colors[i];
+    }
+});
 
 // let colors = [
 //     "rgb(255, 0, 0)",
@@ -30,14 +46,13 @@ for (let i = 0; i < squares.length; i++) {
         let colourClicked = e.toElement.style.backgroundColor;
         //compare the pickedColor to the clickedColour
         // console.log(colourClicked, pickedColor);
+        //change the color of the h1 (let h1 is added at the top)
         let trimmedColourClicked = colourClicked.replace(/\s/g, '');
         let trimmedPickedColor = pickedColor.replace(/\s/g, '');
         if (trimmedColourClicked == trimmedPickedColor) {
             messageDisplay.textContent = "Correct";
             correctColor(pickedColor);
-            // setTimeout(() => {
-            //     generateRandomColors(6);
-            // }, 2000);
+            h1.style.background = colourClicked;
         } else {
             e.toElement.style.backgroundColor = '#232323';
             messageDisplay.textContent = "Try Again";
@@ -82,3 +97,6 @@ function randomColor() {
 // }
 //     return arr;
 // }
+
+
+
