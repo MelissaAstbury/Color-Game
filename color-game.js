@@ -2,6 +2,9 @@ let colors = generateRandomColors(6);
 let h1 = document.querySelector("h1");
 //let resetButton = docuemnt.querySelector("#reset");
 let resetButton = document.getElementById("reset");
+let easyBtn = document.querySelector("#easyBtn");
+let hardBtn = document.querySelector("#hardBtn");
+
 
 resetButton.addEventListener("click", function () {
     //generate all new colors
@@ -100,5 +103,12 @@ function randomColor() {
 //     return arr;
 // }
 
+easyBtn.addEventListener("click", function () {
+    hardBtn.classList.remove("selected");
+    easyBtn.classList.add("selected");
+})
 
-
+hardBtn.addEventListener("click", function () {
+    easyBtn.classList.remove("selected");
+    hardBtn.classList.add("selected");
+})
